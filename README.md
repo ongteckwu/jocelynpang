@@ -1,4 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jocelyn Pang - Personal Brand Website
+
+A warm minimalist personal brand website for a digital commerce strategist-operator specializing in Southeast Asia.
+
+## Adding Images
+
+Place your images in the `public/images/` folder:
+
+```
+public/
+  images/
+    portrait.jpg      # Primary portrait (Hero section)
+    speaking.jpg      # Speaking photo (Speaking section, optional)
+    work-1.jpg        # Selected Work image 1
+    work-2.jpg        # Selected Work image 2
+    work-3.jpg        # Selected Work image 3
+```
+
+### Image Specifications
+
+| Image | Recommended Size | Aspect Ratio | Usage |
+|-------|------------------|--------------|-------|
+| `portrait.jpg` | 800x1000px | 4:5 (mobile) / 1:1 (desktop) | Hero section |
+| `speaking.jpg` | 1200x675px | 16:9 | Speaking section |
+| `work-1.jpg` | 800x600px | 4:3 | Selected Work card 1 |
+| `work-2.jpg` | 800x600px | 4:3 | Selected Work card 2 |
+| `work-3.jpg` | 800x600px | 4:3 | Selected Work card 3 |
+
+### Image Guidelines
+
+- Use warm, clean, confident imagery (not stock photography)
+- Prefer natural lighting and warm tones to match the site palette
+- Portrait should be professional but approachable
+- Work images can be abstract/illustrative or real project visuals
+
+### Enabling Images
+
+After adding images, update the components:
+
+**Hero** (`components/sections/Hero.tsx`):
+```tsx
+import Image from "next/image";
+// Replace placeholder div with:
+<Image src="/images/portrait.jpg" alt="Jocelyn Pang" fill className="object-cover rounded-[20px]" />
+```
+
+**Speaking** (`components/sections/Speaking.tsx`):
+```tsx
+import Image from "next/image";
+// Replace placeholder div with:
+<Image src="/images/speaking.jpg" alt="Jocelyn speaking" fill className="object-cover rounded-xl" />
+```
+
+**Selected Work** (`components/sections/SelectedWork.tsx`):
+```tsx
+import Image from "next/image";
+// Replace placeholder div with:
+<div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+  <Image src={`/images/work-${index + 1}.jpg`} alt={work.title} fill className="object-cover" />
+</div>
+```
+
+---
 
 ## Getting Started
 

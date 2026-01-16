@@ -1,26 +1,274 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-fraunces);
+
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-surface: var(--bg-surface);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-border: var(--border);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Backgrounds - Clean White */
+  --bg-primary: #FFFFFF;      /* Pure White */
+  --bg-surface: #FAFAF8;      /* Barely-there warm white */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Browns - Warm Palette */
+  --brown-light: #A68B5B;     /* Light Brown - labels, readable */
+  --brown-medium: #8B6914;    /* Medium Brown - hover states */
+  --brown-dark: #5C4033;      /* Dark Brown - emphasis */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Text */
+  --text-primary: #1A1A1A;    /* Near black */
+  --text-secondary: #666666;  /* Neutral gray */
+
+  /* Borders */
+  --border: #E8E8E8;          /* Light gray */
+
+  /* Semantic aliases */
+  --accent: var(--brown-light);
+  --accent-hover: var(--brown-medium);
+
+  /* Spacing */
+  --max-width: 1120px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-inter);
+  line-height: 1.5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-fraunces);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-weight: 600;
+}
+
+/* Smooth scrolling with offset for fixed headers */
+html {
+  scroll-padding-top: 2rem;
+}
+
+/* Selection styling */
+::selection {
+  background-color: rgba(184, 138, 98, 0.2);
+  color: var(--text-primary);
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Smooth image loading */
+img {
+  transition: opacity 0.3s ease;
+}
+
+/* Italic styling for serif */
+em, i {
+  font-family: var(--font-fraunces);
+  font-style: italic;
+}
+
+/* =============================================
+   SCROLL-DRIVEN ANIMATION SYSTEM
+   ============================================= */
+
+/* Keyframes */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes parallaxUp {
+  from { transform: translateY(60px); }
+  to { transform: translateY(-60px); }
+}
+
+/* Modern Scroll-Driven Animations (Chrome/Edge 115+) */
+@supports (animation-timeline: view()) {
+  .scroll-fade-up {
+    animation: fadeUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+
+  .scroll-fade-in {
+    animation: fadeIn linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 80%;
+  }
+
+  .scroll-slide-left {
+    animation: slideInLeft linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 80%;
+  }
+
+  .scroll-slide-right {
+    animation: slideInRight linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 80%;
+  }
+
+  .scroll-scale-up {
+    animation: scaleUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+
+  .scroll-parallax {
+    animation: parallaxUp linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+
+  /* Staggered animations */
+  .scroll-stagger > *:nth-child(1) { animation-range: entry 0% entry 80%; }
+  .scroll-stagger > *:nth-child(2) { animation-range: entry 5% entry 85%; }
+  .scroll-stagger > *:nth-child(3) { animation-range: entry 10% entry 90%; }
+  .scroll-stagger > *:nth-child(4) { animation-range: entry 15% entry 95%; }
+  .scroll-stagger > *:nth-child(5) { animation-range: entry 20% entry 100%; }
+  .scroll-stagger > *:nth-child(6) { animation-range: entry 25% entry 100%; }
+
+  .scroll-stagger > * {
+    animation: fadeUp linear both;
+    animation-timeline: view();
+  }
+}
+
+/* Fallback for Safari and older browsers */
+@supports not (animation-timeline: view()) {
+  .scroll-fade-up,
+  .scroll-fade-in,
+  .scroll-slide-left,
+  .scroll-slide-right,
+  .scroll-scale-up {
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .scroll-fade-up {
+    transform: translateY(40px);
+  }
+
+  .scroll-slide-left {
+    transform: translateX(-60px);
+  }
+
+  .scroll-slide-right {
+    transform: translateX(60px);
+  }
+
+  .scroll-scale-up {
+    transform: scale(0.95);
+  }
+
+  /* Visible state - applied via IntersectionObserver */
+  .scroll-fade-up.is-visible,
+  .scroll-fade-in.is-visible,
+  .scroll-slide-left.is-visible,
+  .scroll-slide-right.is-visible,
+  .scroll-scale-up.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Stagger delays for fallback */
+  .scroll-stagger > *:nth-child(1) { transition-delay: 0ms; }
+  .scroll-stagger > *:nth-child(2) { transition-delay: 100ms; }
+  .scroll-stagger > *:nth-child(3) { transition-delay: 200ms; }
+  .scroll-stagger > *:nth-child(4) { transition-delay: 300ms; }
+  .scroll-stagger > *:nth-child(5) { transition-delay: 400ms; }
+  .scroll-stagger > *:nth-child(6) { transition-delay: 500ms; }
+
+  .scroll-stagger > * {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .scroll-stagger.is-visible > * {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Accessibility: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-fade-up,
+  .scroll-fade-in,
+  .scroll-slide-left,
+  .scroll-slide-right,
+  .scroll-scale-up,
+  .scroll-stagger > * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
