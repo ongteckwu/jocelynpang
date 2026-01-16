@@ -57,7 +57,7 @@ export function Speaking() {
             {/* TODO: Replace with real speaking photo */}
             <Image
               src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=1000&fit=crop"
-              alt="Speaking engagement"
+              alt="Jocelyn Pang speaking at FMCG leadership conference about digital commerce strategy"
               fill
               className="object-cover"
             />

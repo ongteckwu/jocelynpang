@@ -5,7 +5,7 @@ export function About() {
       <div className="lg:col-span-4">
         <img
           src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop&crop=faces"
-          alt="Jocelyn Pang"
+          alt="Jocelyn Pang, Digital Commerce Strategist based in Singapore"
           className="w-full aspect-[3/4] object-cover rounded-lg"
         />
       </div>

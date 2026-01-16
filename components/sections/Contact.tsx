@@ -96,15 +96,15 @@ export function Contact() {
 
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--brown-light)]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--brown-light)]" aria-hidden="true"></span>
                 <span className="text-[var(--text-primary)]">Keynotes & panel discussions</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--brown-light)]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--brown-light)]" aria-hidden="true"></span>
                 <span className="text-[var(--text-primary)]">Executive workshops</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--brown-light)]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--brown-light)]" aria-hidden="true"></span>
                 <span className="text-[var(--text-primary)]">Private team sessions</span>
               </div>
             </div>

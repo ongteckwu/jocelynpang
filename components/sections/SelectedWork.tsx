@@ -18,7 +18,7 @@ export function SelectedWork() {
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
           <Image
             src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
-            alt="Multi-market commerce dashboard"
+            alt="Plant-based FMCG brand digital commerce dashboard for Malaysia, Philippines and Vietnam markets"
             fill
             className="object-cover"
           />
@@ -73,7 +73,7 @@ export function SelectedWork() {
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden lg:order-1">
           <Image
             src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
-            alt="Performance analytics dashboard"
+            alt="Health and wellness e-commerce analytics showing category leadership growth in vitamins and supplements"
             fill
             className="object-cover"
           />
@@ -88,7 +88,7 @@ export function SelectedWork() {
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
           <Image
             src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800&h=600&fit=crop"
-            alt="Growth chart analytics"
+            alt="Infant nutrition e-commerce growth analytics showing category over-indexing in declining market"
             fill
             className="object-cover"
           />
