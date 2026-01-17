@@ -33,7 +33,7 @@ export function Hero() {
         {/* Credibility signals - quiet, text-based */}
         <div className="pt-8 mt-4 border-t border-[var(--border)]">
           <p className="text-sm text-[var(--text-secondary)]">
-            Based in Singapore · Working across Southeast Asia · Available for projects
+            Based in Singapore · Working across Southeast Asia · Available for consultancy and talks
           </p>
         </div>
       </div>
