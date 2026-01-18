@@ -17,7 +17,7 @@ export function SelectedWork() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
           <Image
-            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
+            src="/images/growth_pillars.jpeg"
             alt="Plant-based FMCG brand digital commerce dashboard for Malaysia, Philippines and Vietnam markets"
             fill
             className="object-cover"
@@ -72,7 +72,7 @@ export function SelectedWork() {
         </div>
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden lg:order-1">
           <Image
-            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+            src="/images/underperformance.jpeg"
             alt="Health and wellness e-commerce analytics showing category leadership growth in vitamins and supplements"
             fill
             className="object-cover"
@@ -87,7 +87,7 @@ export function SelectedWork() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
           <Image
-            src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800&h=600&fit=crop"
+            src="/images/growth.jpeg"
             alt="Infant nutrition e-commerce growth analytics showing category over-indexing in declining market"
             fill
             className="object-cover"

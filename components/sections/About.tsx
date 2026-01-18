@@ -7,7 +7,7 @@ export function About() {
       <div className="lg:col-span-4">
         <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden">
           <Image
-            src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop&crop=faces"
+            src="/images/about_image.jpeg"
             alt="Jocelyn Pang, Digital Commerce Strategist based in Singapore"
             fill
             className="object-cover"

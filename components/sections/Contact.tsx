@@ -223,8 +223,8 @@ export function Contact() {
                 <div className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--brown-light)] mt-2 shrink-0" aria-hidden="true"></span>
                   <div>
-                    <span className="font-medium text-[var(--text-primary)]">Workshops & Team Sessions</span>
-                    <p className="text-sm text-[var(--text-secondary)] mt-1">Hands-on sessions for leadership teams navigating digital transformation.</p>
+                    <span className="font-medium text-[var(--text-primary)]">Coffee Chat</span>
+                    <p className="text-sm text-[var(--text-secondary)] mt-1">Let's connect over coffee to discuss ideas, share insights, or explore potential collaboration.</p>
                   </div>
                 </div>
               </div>

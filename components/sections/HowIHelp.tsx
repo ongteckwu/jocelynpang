@@ -20,7 +20,7 @@ export function HowIHelp() {
         <div className="hidden lg:block">
           <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
             <Image
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
+              src="/images/people.jpeg"
               alt="Strategic business planning and collaboration"
               fill
               className="object-cover"

@@ -54,9 +54,8 @@ export function Hero() {
       {/* Image */}
       <div className="order-1 lg:order-2">
         <div className="relative aspect-[4/5] lg:aspect-auto lg:h-[80vh] rounded-2xl overflow-hidden">
-          {/* TODO: Replace with real professional headshot - natural light, neutral/warm background, confident pose */}
           <Image
-            src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1200&h=1500&fit=crop&crop=faces"
+            src="/images/hero_image.jpeg"
             alt="Jocelyn Pang - FMCG E-commerce Consultant"
             fill
             className="object-cover"
