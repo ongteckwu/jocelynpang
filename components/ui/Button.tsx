@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import Link from "next/link";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -9,42 +9,46 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
 }
 
+// Hoisted outside component to prevent recreation on each render (rendering-hoist-jsx)
+const ARROW_ICON = (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+  </svg>
+);
+
+const BASE_STYLES = "inline-flex items-center justify-center rounded-xl px-8 py-4 font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--brown-light)] focus:ring-offset-2";
+
+const VARIANT_STYLES = {
+  primary: "bg-[var(--brown-light)] text-white hover:bg-[var(--brown-medium)]",
+  secondary: "bg-transparent border border-[var(--brown-light)] text-[var(--brown-dark)] hover:bg-[var(--brown-light)]/10",
+} as const;
+
 export function Button({ variant = "primary", className = "", children, href, ...props }: ButtonProps) {
-  const baseStyles = "inline-flex items-center justify-center rounded-xl px-8 py-4 font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--brown-light)] focus:ring-offset-2";
+  // Memoized smooth scroll handler (rerender optimization)
+  const handleHashClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const targetId = (e.currentTarget.getAttribute("href") || "").slice(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      const offset = 200;
+      const top = target.getBoundingClientRect().top + window.scrollY + offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }, []);
 
-  const variants = {
-    primary: "bg-[var(--brown-light)] text-white hover:bg-[var(--brown-medium)]",
-    secondary: "bg-transparent border border-[var(--brown-light)] text-[var(--brown-dark)] hover:bg-[var(--brown-light)]/10",
-  };
-
-  const content = (
+  const content = useMemo(() => (
     <span className="flex items-center gap-2">
       {children}
-      {variant === "primary" && (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-      )}
+      {variant === "primary" && ARROW_ICON}
     </span>
-  );
+  ), [children, variant]);
 
-  const styles = `${baseStyles} ${variants[variant]} ${className}`;
+  const styles = `${BASE_STYLES} ${VARIANT_STYLES[variant]} ${className}`;
 
   if (href) {
-    // Use plain anchor for hash links (same-page navigation)
     if (href.startsWith("#")) {
-      const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.preventDefault();
-        const targetId = href.slice(1);
-        const target = document.getElementById(targetId);
-        if (target) {
-          const offset = 200; // Scroll this many pixels past the top of the section
-          const top = target.getBoundingClientRect().top + window.scrollY + offset;
-          window.scrollTo({ top, behavior: "smooth" });
-        }
-      };
       return (
-        <a href={href} onClick={handleClick} className={styles}>
+        <a href={href} onClick={handleHashClick} className={styles}>
           {content}
         </a>
       );

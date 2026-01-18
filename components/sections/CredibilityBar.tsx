@@ -1,16 +1,18 @@
+// Hoisted outside component to prevent recreation on each render (rendering-hoist-jsx)
+const CREDIBILITY_ITEMS = [
+  { id: "markets-launched", number: "3", label: "Markets launched", sublabel: "in 6 months" },
+  { id: "category-overindex", number: "+60%", label: "Category over-index", sublabel: "Vitamins & Supplements" },
+  { id: "channels-built", number: "10+", label: "Channels built", sublabel: "from scratch" },
+  { id: "sea-markets", number: "6", label: "SEA markets", sublabel: "P&L ownership" },
+] as const;
+
 export function CredibilityBar() {
-  const items = [
-    { number: "3", label: "Markets launched", sublabel: "in 6 months" },
-    { number: "+60%", label: "Category over-index", sublabel: "Vitamins & Supplements" },
-    { number: "10+", label: "Channels built", sublabel: "from scratch" },
-    { number: "6", label: "SEA markets", sublabel: "P&L ownership" },
-  ];
 
   return (
     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 md:gap-4">
-      {items.map((item, index) => (
+      {CREDIBILITY_ITEMS.map((item) => (
         <div
-          key={index}
+          key={item.id}
           className="group flex items-baseline gap-4 md:flex-col md:items-start md:gap-1"
         >
           <span className="text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-[var(--brown-dark)] leading-none tracking-tight">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/Button";
 
 export function Contact() {
@@ -13,7 +13,8 @@ export function Contact() {
   });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Memoized with useCallback to prevent recreation on each render (rerender-functional-setstate)
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
 
@@ -33,13 +34,16 @@ export function Contact() {
     } catch {
       setStatus("error");
     }
-  };
+  }, [formData]);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  // Memoized change handler using functional setState for stable reference (rerender-functional-setstate)
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    },
+    []
+  );
 
   const isFormComplete = formData.name && formData.email && formData.enquiryType && formData.message;
 

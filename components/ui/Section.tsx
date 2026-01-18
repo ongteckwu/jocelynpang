@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 
 interface SectionProps {
   variant?: "primary" | "surface";
@@ -9,6 +9,16 @@ interface SectionProps {
   id?: string;
   animation?: "fade-up" | "slide-left" | "slide-right" | "scale" | "none";
   stagger?: boolean;
+}
+
+// Module-level check to avoid re-render on mount (rerender-lazy-state-init)
+// This runs once when the module is loaded, not on every component render
+let supportsScrollTimeline: boolean | null = null;
+function getSupportsScrollTimeline(): boolean {
+  if (supportsScrollTimeline === null) {
+    supportsScrollTimeline = typeof CSS !== "undefined" && CSS.supports("animation-timeline", "view()");
+  }
+  return supportsScrollTimeline;
 }
 
 export function Section({
@@ -22,17 +32,10 @@ export function Section({
   const bgClass = variant === "primary" ? "bg-[var(--bg-primary)]" : "bg-[var(--bg-surface)]";
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [supportsScrollTimeline, setSupportsScrollTimeline] = useState(true);
-
-  // Check for native scroll-timeline support
-  useEffect(() => {
-    const hasSupport = CSS.supports("animation-timeline", "view()");
-    setSupportsScrollTimeline(hasSupport);
-  }, []);
 
   // Fallback IntersectionObserver for Safari/Firefox
   useEffect(() => {
-    if (supportsScrollTimeline || animation === "none") return;
+    if (getSupportsScrollTimeline() || animation === "none") return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -49,7 +52,7 @@ export function Section({
     }
 
     return () => observer.disconnect();
-  }, [supportsScrollTimeline, animation]);
+  }, [animation]);
 
   // Map animation prop to CSS class
   const getAnimationClass = () => {

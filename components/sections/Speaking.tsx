@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 
+// Hoisted outside component to prevent recreation on each render (rendering-hoist-jsx)
+const TOPICS = [
+  { id: "topic-scale", text: "Why most FMCG E-commerce strategies break at scale" },
+  { id: "topic-growth", text: "The hidden cost of performance-led growth" },
+  { id: "topic-markets", text: "Operating digital commerce across uneven SEA markets" },
+] as const;
+
 export function Speaking() {
-  const topics = [
-    "Why most FMCG E-commerce strategies break at scale",
-    "The hidden cost of performance-led growth",
-    "Operating digital commerce across uneven SEA markets",
-  ];
 
   return (
     <div className="flex flex-col gap-16 md:gap-24">
@@ -35,13 +37,13 @@ export function Speaking() {
             Topics I cover
           </span>
           <div className="flex flex-col gap-8">
-            {topics.map((topic, index) => (
-              <div key={index} className="group flex gap-6 items-baseline pb-8 border-b border-[var(--border)] last:border-b-0 last:pb-0">
+            {TOPICS.map((topic, index) => (
+              <div key={topic.id} className="group flex gap-6 items-baseline pb-8 border-b border-[var(--border)] last:border-b-0 last:pb-0">
                 <span className="text-sm font-medium text-[var(--brown-light)]">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <h3 className="text-xl md:text-2xl font-serif text-[var(--text-primary)] group-hover:text-[var(--brown-dark)] transition-colors">
-                  {topic}
+                  {topic.text}
                 </h3>
               </div>
             ))}

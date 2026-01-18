@@ -1,13 +1,19 @@
+import Image from "next/image";
+
 export function About() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
       {/* Left side - full image */}
       <div className="lg:col-span-4">
-        <img
-          src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop&crop=faces"
-          alt="Jocelyn Pang, Digital Commerce Strategist based in Singapore"
-          className="w-full aspect-[3/4] object-cover rounded-lg"
-        />
+        <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden">
+          <Image
+            src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop&crop=faces"
+            alt="Jocelyn Pang, Digital Commerce Strategist based in Singapore"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 33vw"
+          />
+        </div>
       </div>
 
       {/* Right side - main content */}
