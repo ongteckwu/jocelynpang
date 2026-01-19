@@ -180,7 +180,7 @@ const faqSchema = {
       name: "How can I hire Jocelyn Pang for consulting or speaking?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "You can contact Jocelyn through the enquiry form on her website at jocelynpang.com or email her directly at jocelynpang95@gmail.com. She typically responds within 48 hours and works with FMCG brands scaling across Southeast Asia.",
+        text: "You can contact Jocelyn through the enquiry form on her website at jocelynpang.com or email her directly at jocelynpang.ec@gmail.com. She typically responds within 48 hours and works with FMCG brands scaling across Southeast Asia.",
       },
     },
   ],

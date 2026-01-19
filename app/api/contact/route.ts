@@ -2,7 +2,32 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const toEmail = process.env.RESEND_TO_EMAIL || "jocelynpang95@gmail.com";
+const toEmail = process.env.RESEND_TO_EMAIL || "jocelynpang.ec@gmail.com";
+
+const BLOCKED_EMAIL_DOMAINS = [
+  "gmail.com",
+  "outlook.com",
+  "live.com",
+  "hotmail.com",
+  "yahoo.com",
+  "yahoo.co.uk",
+  "aol.com",
+  "icloud.com",
+  "me.com",
+  "mac.com",
+  "protonmail.com",
+  "proton.me",
+  "mail.com",
+  "zoho.com",
+  "yandex.com",
+  "gmx.com",
+  "gmx.net",
+];
+
+function isBlockedEmailDomain(email: string): boolean {
+  const domain = email.toLowerCase().split("@")[1];
+  return BLOCKED_EMAIL_DOMAINS.includes(domain);
+}
 
 export async function POST(request: Request) {
   try {
@@ -11,6 +36,13 @@ export async function POST(request: Request) {
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: "Name, email, and message are required" },
+        { status: 400 }
+      );
+    }
+
+    if (isBlockedEmailDomain(email)) {
+      return NextResponse.json(
+        { error: "Please use a business email address" },
         { status: 400 }
       );
     }

@@ -3,6 +3,31 @@
 import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/Button";
 
+const BLOCKED_EMAIL_DOMAINS = [
+  "gmail.com",
+  "outlook.com",
+  "live.com",
+  "hotmail.com",
+  "yahoo.com",
+  "yahoo.co.uk",
+  "aol.com",
+  "icloud.com",
+  "me.com",
+  "mac.com",
+  "protonmail.com",
+  "proton.me",
+  "mail.com",
+  "zoho.com",
+  "yandex.com",
+  "gmx.com",
+  "gmx.net",
+];
+
+function isBlockedEmailDomain(email: string): boolean {
+  const domain = email.toLowerCase().split("@")[1];
+  return domain ? BLOCKED_EMAIL_DOMAINS.includes(domain) : false;
+}
+
 export function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -12,10 +37,17 @@ export function Contact() {
     message: "",
   });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [emailError, setEmailError] = useState<string | null>(null);
 
   // Memoized with useCallback to prevent recreation on each render (rerender-functional-setstate)
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isBlockedEmailDomain(formData.email)) {
+      setEmailError("Please use a business email address");
+      return;
+    }
+
     setStatus("sending");
 
     try {
@@ -41,11 +73,14 @@ export function Contact() {
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       const { name, value } = e.target;
       setFormData((prev) => ({ ...prev, [name]: value }));
+      if (name === "email") {
+        setEmailError(null);
+      }
     },
     []
   );
 
-  const isFormComplete = formData.name && formData.email && formData.enquiryType && formData.message;
+  const isFormComplete = formData.name && formData.email && formData.enquiryType && formData.message && !emailError && !isBlockedEmailDomain(formData.email);
 
   return (
     <div className="flex flex-col gap-16 md:gap-24">
@@ -114,8 +149,9 @@ export function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="you@company.com"
-                    className="px-4 py-3 border-b border-[var(--border)] bg-transparent focus:outline-none focus:border-[var(--brown-light)] transition-colors placeholder:text-[var(--text-secondary)]/50"
+                    className={`px-4 py-3 border-b bg-transparent focus:outline-none transition-colors placeholder:text-[var(--text-secondary)]/50 ${emailError ? "border-red-500" : "border-[var(--border)] focus:border-[var(--brown-light)]"}`}
                   />
+                  {emailError && <p className="text-red-600 text-sm">{emailError}</p>}
                 </div>
               </div>
 
@@ -194,10 +230,10 @@ export function Contact() {
             <div className="flex flex-col gap-3">
               <span className="text-sm font-medium tracking-widest uppercase text-[var(--brown-light)]">Email</span>
               <a
-                href="mailto:jocelynpang95@gmail.com"
+                href="mailto:jocelynpang.ec@gmail.com"
                 className="text-xl md:text-2xl font-serif text-[var(--text-primary)] hover:text-[var(--brown-dark)] transition-colors break-all"
               >
-                jocelynpang95@gmail.com
+                jocelynpang.ec@gmail.com
               </a>
             </div>
 
