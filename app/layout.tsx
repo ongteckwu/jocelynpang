@@ -76,11 +76,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://jocelynpang.com",
   },
-
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-icon",
-  },
 };
 
 const personSchema = {
